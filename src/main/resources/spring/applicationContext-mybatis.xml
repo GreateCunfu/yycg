@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+
+">
+     <!-- sqlSession -->
+     <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+         <!-- 配置数据源 -->
+         <property name="dataSource" ref="dataSource"/>
+         <!-- 配置 Mybatis 的全局配置文件 -->
+         <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+         <!-- 指定别名 -->
+         <property name="typeAliasesPackage" value="com.yycg.system.pojo.po"/>
+         <!-- 扫描 mapper xml 文件 -->
+         <property name="mapperLocations">
+             <list>
+                 <value>classpath:mybatis/mappers/**/*.xml</value>
+             </list>
+         </property>
+     </bean>
+
+    <!-- 扫描Mapper 接口-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.yycg.system.mapper"/>
+        <property name="annotationClass" value="com.yycg.system.annotion.Myppers"/>
+    </bean>
+
+</beans>
